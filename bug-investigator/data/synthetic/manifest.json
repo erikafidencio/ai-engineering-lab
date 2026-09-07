@@ -1,0 +1,49 @@
+{
+  "version": "1.0",
+  "domain": "ShopFlow",
+  "description": "Synthetic incident dataset for AI Bug Investigator MVP (public portfolio — no real company data)",
+  "symptoms": {
+    "orders_missing": {
+      "label": "Orders missing after checkout",
+      "escalate": "Order ingestion / consumer team"
+    },
+    "duplicate_charge": {
+      "label": "Duplicate charges on retry",
+      "escalate": "Payments platform"
+    },
+    "inventory_stale": {
+      "label": "Inventory stale (admin vs storefront)",
+      "escalate": "Inventory sync"
+    }
+  },
+  "incidents": [
+    {
+      "key": "INC-1001",
+      "file": "incidents/INC-1001.json",
+      "symptom_id": "orders_missing",
+      "runbook": "runbooks/orders-missing-after-checkout.md",
+      "logs": "logs/INC-1001.json",
+      "trace_id": "ORD-Ingest-a1b2c3d4e5f6789012345678abcdef01",
+      "status": "Open"
+    },
+    {
+      "key": "INC-1002",
+      "file": "incidents/INC-1002.json",
+      "symptom_id": "duplicate_charge",
+      "runbook": "runbooks/duplicate-charges-idempotency.md",
+      "logs": "logs/INC-1002.json",
+      "trace_id": "PAY-Trace-8821aa00bb11cc22dd33ee44ff55gg66",
+      "status": "In Progress"
+    },
+    {
+      "key": "INC-1003",
+      "file": "incidents/INC-1003.json",
+      "symptom_id": "inventory_stale",
+      "runbook": "runbooks/inventory-stale-cache.md",
+      "logs": "logs/INC-1003.json",
+      "trace_id": "INV-Sync-2026-03-01T08:00:00Z",
+      "status": "Resolved"
+    }
+  ],
+  "cheatsheet": "cheatsheet.md"
+}

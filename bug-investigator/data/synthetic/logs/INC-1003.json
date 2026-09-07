@@ -1,0 +1,41 @@
+{
+  "incident_key": "INC-1003",
+  "trace_id": "INV-Sync-2026-03-01T08:00:00Z",
+  "environment": "prod",
+  "region": "US",
+  "services": ["inventory-api", "inventory-sync-worker", "storefront-edge"],
+  "entries": [
+    {
+      "timestamp": "2026-03-01T08:00:00Z",
+      "level": "INFO",
+      "entity.name": "inventory-sync-worker-prod",
+      "message": "Warehouse feed sync completed",
+      "sync_id": "INV-Sync-2026-03-01T08:00:00Z",
+      "sku": "WIDGET-42",
+      "quantity": 120
+    },
+    {
+      "timestamp": "2026-03-01T08:05:12Z",
+      "level": "WARN",
+      "entity.name": "storefront-edge-prod",
+      "message": "Cache hit for inv:STORE-11bb22cc:WIDGET-42 — quantity=0 (TTL not expired)",
+      "store_id": "STORE-11bb22cc-33dd-44ee-55ff-66aa77bb88cc"
+    },
+    {
+      "timestamp": "2026-03-01T08:12:44Z",
+      "level": "INFO",
+      "entity.name": "inventory-api-prod",
+      "message": "Direct API read SKU WIDGET-42 quantity=120",
+      "store_id": "STORE-11bb22cc-33dd-44ee-55ff-66aa77bb88cc"
+    },
+    {
+      "timestamp": "2026-03-01T08:13:01Z",
+      "level": "ERROR",
+      "entity.name": "storefront-edge-prod",
+      "message": "Checkout blocked: out_of_stock (cache) while admin shows in_stock",
+      "sku": "WIDGET-42",
+      "metric": "INV-lag",
+      "lag_minutes": 13
+    }
+  ]
+}

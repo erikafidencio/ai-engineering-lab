@@ -1,0 +1,10 @@
+{
+  "key": "INC-1002",
+  "summary": "Duplicate charges on retry after timeout",
+  "status": "In Progress",
+  "priority": "Critical",
+  "labels": ["payments", "duplicate", "idempotency"],
+  "description": "Customers charged twice when checkout times out and they retry.\n\nError pattern: PAY-409 IdempotencyKeyConflict\nService: payment-service\nTrace: PAY-Trace-8821aa00bb11cc22dd33ee44ff55gg66\nAffected region: EU\n\nIdempotency key header missing on client retry path.",
+  "comments": [],
+  "url": "https://jira.example.com/browse/INC-1002"
+}

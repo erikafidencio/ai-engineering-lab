@@ -1,0 +1,48 @@
+{
+  "incident_key": "INC-1002",
+  "trace_id": "PAY-Trace-8821aa00bb11cc22dd33ee44ff55gg66",
+  "environment": "prod",
+  "region": "EU",
+  "services": ["checkout-service", "payment-service"],
+  "entries": [
+    {
+      "timestamp": "2026-03-02T09:14:01Z",
+      "level": "INFO",
+      "entity.name": "checkout-service-prod",
+      "message": "Initiating payment charge",
+      "trace_id": "PAY-Trace-8821aa00bb11cc22dd33ee44ff55gg66",
+      "idempotency_key": "idem-7f3a9c2e-4b1d-4e8a-9f0c-1d2e3f4a5b6c"
+    },
+    {
+      "timestamp": "2026-03-02T09:14:45Z",
+      "level": "WARN",
+      "entity.name": "checkout-service-prod",
+      "message": "Client timeout after 44s, user may retry",
+      "trace_id": "PAY-Trace-8821aa00bb11cc22dd33ee44ff55gg66"
+    },
+    {
+      "timestamp": "2026-03-02T09:14:46Z",
+      "level": "INFO",
+      "entity.name": "payment-service-prod",
+      "message": "Charge completed",
+      "trace_id": "PAY-Trace-8821aa00bb11cc22dd33ee44ff55gg66",
+      "charge_id": "ch_01EU8821"
+    },
+    {
+      "timestamp": "2026-03-02T09:15:02Z",
+      "level": "INFO",
+      "entity.name": "checkout-service-prod",
+      "message": "Retry payment charge (mobile client)",
+      "trace_id": "PAY-Trace-8821aa00bb11cc22dd33ee44ff55gg66",
+      "idempotency_key": null
+    },
+    {
+      "timestamp": "2026-03-02T09:15:03Z",
+      "level": "ERROR",
+      "entity.name": "payment-service-prod",
+      "message": "PAY-409 IdempotencyKeyConflict — new charge created instead of returning existing",
+      "trace_id": "PAY-Trace-8821aa00bb11cc22dd33ee44ff55gg66",
+      "charge_id": "ch_01EU8822"
+    }
+  ]
+}

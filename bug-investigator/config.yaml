@@ -1,0 +1,25 @@
+service:
+  name: ShopFlow
+  domain: order-fulfillment
+
+indexing:
+  chunk_size: 800
+  chunk_overlap: 120
+  embedding_model: all-MiniLM-L6-v2
+  collection_name: shopflow-incidents
+
+synthetic_data:
+  incidents_dir: data/synthetic/incidents
+  runbooks_dir: data/synthetic/runbooks
+  logs_dir: data/synthetic/logs
+
+symptoms:
+  orders_missing:
+    keywords: ["missing order", "order not showing", "empty dashboard", "consumer lag", "ingestion failed", "ORD-Ingest"]
+    escalate: "Order ingestion / consumer team"
+  duplicate_charge:
+    keywords: ["duplicate", "double charge", "idempotency", "retry storm", "PAY-409"]
+    escalate: "Payments platform"
+  inventory_stale:
+    keywords: ["stale inventory", "out of stock", "sync delay", "cache miss", "INV-lag"]
+    escalate: "Inventory sync"

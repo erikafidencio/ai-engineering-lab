@@ -1,0 +1,15 @@
+{
+  "key": "INC-1003",
+  "summary": "Inventory shows in-stock but checkout blocks purchase",
+  "status": "Resolved",
+  "priority": "Medium",
+  "labels": ["inventory", "cache", "sync"],
+  "description": "SKU WIDGET-42 shows 120 units in admin but storefront reports out of stock.\n\nINV-lag detected between inventory-api and edge cache.\nStore ID: STORE-11bb22cc-33dd-44ee-55ff-66aa77bb88cc\nLast sync job: INV-Sync-2026-03-01T08:00:00Z",
+  "comments": [
+    {
+      "author": "inventory-oncall",
+      "body": "Root cause: Redis TTL 5m while warehouse feed runs every 15m. Fixed by aligning cache invalidation with sync webhook."
+    }
+  ],
+  "url": "https://jira.example.com/browse/INC-1003"
+}

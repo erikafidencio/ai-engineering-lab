@@ -1,0 +1,48 @@
+{
+  "incident_key": "INC-1001",
+  "trace_id": "ORD-Ingest-a1b2c3d4e5f6789012345678abcdef01",
+  "environment": "prod",
+  "region": "US",
+  "services": ["checkout-service", "payment-service", "order-consumer", "order-api"],
+  "entries": [
+    {
+      "timestamp": "2026-03-01T14:02:11Z",
+      "level": "INFO",
+      "entity.name": "checkout-service-prod",
+      "message": "Checkout completed, forwarding to ingestion",
+      "trace_id": "ORD-Ingest-a1b2c3d4e5f6789012345678abcdef01",
+      "store_id": "STORE-77ea2f10-9c4d-4a1b-8e2f-3d4c5b6a7e89"
+    },
+    {
+      "timestamp": "2026-03-01T14:02:14Z",
+      "level": "INFO",
+      "entity.name": "payment-service-prod",
+      "message": "Payment captured successfully",
+      "trace_id": "ORD-Ingest-a1b2c3d4e5f6789012345678abcdef01",
+      "amount_usd": 149.99
+    },
+    {
+      "timestamp": "2026-03-01T14:02:18Z",
+      "level": "WARN",
+      "entity.name": "order-consumer-prod",
+      "message": "Consumer lag 4m32s on order-ingestion queue",
+      "queue": "order-ingestion",
+      "lag_seconds": 272
+    },
+    {
+      "timestamp": "2026-03-01T14:05:03Z",
+      "level": "ERROR",
+      "entity.name": "order-consumer-prod",
+      "message": "Payload validation failed: affected=0 rows persisted",
+      "trace_id": "ORD-Ingest-a1b2c3d4e5f6789012345678abcdef01",
+      "error_code": "ORD-VALIDATION-001"
+    },
+    {
+      "timestamp": "2026-03-01T14:05:04Z",
+      "level": "ERROR",
+      "entity.name": "order-consumer-prod",
+      "message": "Message moved to DLQ order-ingestion-dlq",
+      "trace_id": "ORD-Ingest-a1b2c3d4e5f6789012345678abcdef01"
+    }
+  ]
+}
