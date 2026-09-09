@@ -147,24 +147,39 @@ RAG allows the system to search based on **semantic similarity**, making it poss
 
 This project uses **ChromaDB** as the vector store for the initial implementation.
 
+## Quick Start (Part 2 — RAG)
+
+```bash
+cd bug-investigator
+./scripts/index.sh
+
+export PYTHONPATH=src
+python -m bug_investigator status
+python -m bug_investigator search "order missing after checkout"
+python -m bug_investigator diagnose "double charge PAY-409 idempotency"
+```
+
+Optional: set `OPENAI_API_KEY` in `.env` for LLM synthesis in `diagnose` (falls back to template without it).
+
+Run tests:
+
+```bash
+pip install -r requirements.txt
+PYTHONPATH=src pytest tests/ -q
+```
+
 ## Current Status
 
 🚧 **Work in Progress**
 
-Current capabilities:
-
-- LLM integration
-- RAG pipeline
-- Embedding generation
-- ChromaDB vector storage
-- Semantic retrieval
-- Structured investigation prompts
-- MCP-based workflow exploration
-- Public synthetic incident dataset
-- Reproducible local setup
-- Automated evaluation
-- Retrieval quality metrics
-- End-to-end demo
+| Part | Status |
+|------|--------|
+| 1 — Synthetic dataset (ShopFlow) | ✅ |
+| 2 — RAG (ChromaDB + CLI) | ✅ |
+| 3 — LangGraph agent | ⏳ |
+| 4 — Mock MCP tools | ⏳ |
+| 5 — End-to-end `investigate` demo | ⏳ |
+| 6 — Retrieval evaluation metrics | ⏳ |
 
 ## Future Improvements
 

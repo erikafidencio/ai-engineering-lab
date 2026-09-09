@@ -66,12 +66,22 @@ Defined in `manifest.json` and mirrored in root `config.yaml` → `symptoms:`.
 | `duplicate_charge` | INC-1002 | `PAY-Trace-*` |
 | `inventory_stale` | INC-1003 | `INV-Sync-*` |
 
-## Next parts (not in scope yet)
+## Part 2 — RAG (done)
 
-- **Part 2 — RAG:** index `incidents/`, `runbooks/`, `cheatsheet.md` into ChromaDB
+Index and query from project root:
+
+```bash
+./scripts/index.sh
+export PYTHONPATH=src
+python -m bug_investigator search "ORD-Ingest order missing"
+python -m bug_investigator diagnose "double charge PAY-409"
+```
+
+## Next parts
+
 - **Part 3 — Agent:** LangGraph workflow
 - **Part 4 — Mock tools:** read tickets/logs from these files
-- **Part 5 — CLI:** `index.sh` + `investigate.sh INC-1001`
+- **Part 5 — CLI:** `investigate.sh INC-1001`
 
 ## Validate files manually
 
