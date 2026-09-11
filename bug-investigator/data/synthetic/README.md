@@ -77,11 +77,19 @@ python -m bug_investigator search "ORD-Ingest order missing"
 python -m bug_investigator diagnose "double charge PAY-409"
 ```
 
+## Part 3 — Agent (done)
+
+```bash
+./scripts/investigate.sh INC-1001
+./scripts/investigate.sh "double charge PAY-409"
+```
+
+Output: `output/{INC-1001|symptom-*}/agent_report.{md,json}`
+
 ## Next parts
 
-- **Part 3 — Agent:** LangGraph workflow
-- **Part 4 — Mock tools:** read tickets/logs from these files
-- **Part 5 — CLI:** `investigate.sh INC-1001`
+- **Part 4 — Mock MCP polish:** external JSON import, tool interfaces
+- **Part 5 — Demo docs + evaluation metrics**
 
 ## Validate files manually
 

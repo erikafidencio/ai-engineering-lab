@@ -14,6 +14,7 @@ _SRC = Path(__file__).resolve().parents[1]
 if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
+from bug_investigator.agent.graph import run_investigation
 from bug_investigator.config import AppConfig, project_root
 from bug_investigator.rag.indexer import index_documents
 from bug_investigator.rag.query import diagnose, search
@@ -32,7 +33,7 @@ def _load_env() -> AppConfig:
 
 @click.group()
 def cli() -> None:
-    """AI Bug Investigator — RAG CLI (MVP Part 2)."""
+    """AI Bug Investigator — RAG + investigation agent (MVP)."""
 
 
 @cli.command("status")
@@ -114,6 +115,37 @@ def diagnose_cmd(query: str, json_out: bool) -> None:
         console.print("[bold]Next steps[/bold]")
         for index, step in enumerate(result["next_steps"], 1):
             console.print(f"{index}. {step}")
+
+
+@cli.command("investigate")
+@click.argument("target")
+@click.option("--json-out", is_flag=True, help="Print report JSON to stdout")
+def investigate_cmd(target: str, json_out: bool) -> None:
+    """Investigate a mock ticket (INC-1001) or free-text symptom."""
+    _load_env()
+    console.print(f"[bold]Investigating:[/bold] {target}")
+    result = run_investigation(target)
+
+    report = result.get("report")
+    if not report:
+        console.print("[red]Failed: report not generated[/red]")
+        raise SystemExit(1)
+
+    metadata = result.get("metadata") or report.metadata or {}
+    json_path = metadata.get("json_path", "")
+    md_path = metadata.get("md_path", "")
+
+    if json_out:
+        console.print(json.dumps(report.to_dict(), ensure_ascii=False, indent=2))
+    else:
+        console.print(report.to_markdown())
+        if json_path and md_path:
+            console.print(f"\n[green]Saved to:[/green]\n  {json_path}\n  {md_path}")
+
+    if report.warnings:
+        console.print("\n[yellow]Warnings:[/yellow]")
+        for warning in report.warnings:
+            console.print(f"  - {warning}")
 
 
 if __name__ == "__main__":
